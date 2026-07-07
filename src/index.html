@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MacDPI - DPI Bypass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Custom Titlebar -->
+  <div class="titlebar" id="titlebar">
+    <div class="titlebar-drag"></div>
+    <div class="titlebar-controls">
+      <button class="titlebar-btn minimize" id="btn-minimize" title="Küçült">
+        <svg width="12" height="12" viewBox="0 0 12 12"><rect y="5" width="12" height="2" rx="1" fill="currentColor"/></svg>
+      </button>
+      <button class="titlebar-btn close" id="btn-close" title="Gizle">
+        <svg width="12" height="12" viewBox="0 0 12 12"><path d="M1 1L11 11M11 1L1 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <div class="logo-icon" id="logo-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <path d="M16 2C8.268 2 2 8.268 2 16s6.268 14 14 14 14-6.268 14-14S23.732 2 16 2z" fill="url(#grad1)" opacity="0.15"/>
+            <path d="M10 16.5C10 13 12.5 10 16 10s6 3 6 6.5" stroke="url(#grad2)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <circle cx="11" cy="17" r="2.5" fill="url(#grad2)" opacity="0.9"/>
+            <circle cx="21" cy="17" r="2.5" fill="url(#grad2)" opacity="0.9"/>
+            <path d="M8 21c2 3 5 4.5 8 4.5s6-1.5 8-4.5" stroke="url(#grad2)" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+            <defs>
+              <linearGradient id="grad1" x1="2" y1="2" x2="30" y2="30">
+                <stop stop-color="#00ff88"/><stop offset="1" stop-color="#00d4ff"/>
+              </linearGradient>
+              <linearGradient id="grad2" x1="8" y1="10" x2="24" y2="25">
+                <stop stop-color="#00ff88"/><stop offset="1" stop-color="#00d4ff"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <h1>MacDPI</h1>
+          <span class="subtitle">Türkiye DPI Bypass</span>
+        </div>
+      </div>
+      <div class="status-badge" id="status-badge">
+        <span class="status-dot" id="status-dot"></span>
+        <span class="status-text" id="status-text">Bağlı Değil</span>
+      </div>
+    </header>
+
+    <!-- Connection Toggle -->
+    <section class="connection-section">
+      <div class="toggle-container" id="toggle-container">
+        <div class="toggle-ring" id="toggle-ring">
+          <div class="toggle-glow" id="toggle-glow"></div>
+          <button class="toggle-button" id="toggle-button" aria-label="Bağlantıyı Aç/Kapa">
+            <div class="toggle-icon" id="toggle-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/>
+                <line x1="12" y1="2" x2="12" y2="12"/>
+              </svg>
+            </div>
+          </button>
+        </div>
+        <p class="toggle-label" id="toggle-label">Bağlanmak için dokunun</p>
+      </div>
+    </section>
+
+    <!-- Tab Navigation -->
+    <nav class="tab-nav" id="tab-nav">
+      <button class="tab-btn active" data-tab="presets">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10M6 20V4M18 20v-4"/></svg>
+        Presetler
+      </button>
+      <button class="tab-btn" data-tab="dns">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        DNS
+      </button>
+      <button class="tab-btn" data-tab="settings">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Ayarlar
+      </button>
+      <button class="tab-btn" data-tab="logs">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Loglar
+      </button>
+    </nav>
+
+    <!-- Tab Content -->
+    <div class="tab-content">
+      <!-- Presets Tab -->
+      <div class="tab-pane active" id="tab-presets">
+        <div class="preset-grid" id="preset-grid">
+          <!-- Presets will be dynamically inserted -->
+        </div>
+      </div>
+
+      <!-- DNS Tab -->
+      <div class="tab-pane" id="tab-dns">
+        <div class="settings-group">
+          <h3 class="settings-title">DNS Sunucuları</h3>
+          <div class="dns-options">
+            <label class="dns-option" data-dns="cloudflare">
+              <input type="radio" name="dns" value="cloudflare" checked>
+              <div class="dns-card">
+                <div class="dns-info">
+                  <span class="dns-name">Cloudflare</span>
+                  <span class="dns-addr">1.1.1.1 / 1.0.0.1</span>
+                </div>
+                <span class="dns-badge fast">Hızlı</span>
+              </div>
+            </label>
+            <label class="dns-option" data-dns="google">
+              <input type="radio" name="dns" value="google">
+              <div class="dns-card">
+                <div class="dns-info">
+                  <span class="dns-name">Google</span>
+                  <span class="dns-addr">8.8.8.8 / 8.8.4.4</span>
+                </div>
+                <span class="dns-badge reliable">Güvenilir</span>
+              </div>
+            </label>
+            <label class="dns-option" data-dns="quad9">
+              <input type="radio" name="dns" value="quad9">
+              <div class="dns-card">
+                <div class="dns-info">
+                  <span class="dns-name">Quad9</span>
+                  <span class="dns-addr">9.9.9.9 / 149.112.112.112</span>
+                </div>
+                <span class="dns-badge secure">Güvenli</span>
+              </div>
+            </label>
+            <label class="dns-option" data-dns="custom">
+              <input type="radio" name="dns" value="custom">
+              <div class="dns-card">
+                <div class="dns-info">
+                  <span class="dns-name">Özel DNS</span>
+                  <input type="text" class="dns-custom-input" id="custom-dns-input" placeholder="Ör: 208.67.222.222" disabled>
+                </div>
+                <span class="dns-badge custom">Özel</span>
+              </div>
+            </label>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <span class="setting-label">DNS over HTTPS (DoH)</span>
+              <span class="setting-desc">DNS sorgularını şifrele</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="doh-toggle" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings Tab -->
+      <div class="tab-pane" id="tab-settings">
+        <div class="settings-group">
+          <h3 class="settings-title">Gelişmiş Ayarlar</h3>
+          <div class="setting-row">
+            <div class="setting-info">
+              <span class="setting-label">Proxy Portu</span>
+              <span class="setting-desc">SpoofDPI dinleme portu</span>
+            </div>
+            <input type="number" class="setting-input" id="setting-port" value="8080" min="1024" max="65535">
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <span class="setting-label">Window Size</span>
+              <span class="setting-desc">TCP pencere boyutu (fragment)</span>
+            </div>
+            <input type="number" class="setting-input" id="setting-window-size" value="1" min="1" max="65535">
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <span class="setting-label">Timeout (sn)</span>
+              <span class="setting-desc">Bağlantı zaman aşımı</span>
+            </div>
+            <input type="number" class="setting-input" id="setting-timeout" value="120" min="10" max="600">
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <h3 class="settings-title">Uygulama</h3>
+          <div class="setting-row">
+            <div class="setting-info">
+              <span class="setting-label">Başlangıçta Çalıştır</span>
+              <span class="setting-desc">macOS açılışında otomatik başla</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="autostart-toggle">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <span class="setting-label">Otomatik Bağlan</span>
+              <span class="setting-desc">Uygulama açılınca otomatik bağlan</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="autoconnect-toggle">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <h3 class="settings-title">SpoofDPI Motoru</h3>
+          <div class="engine-status" id="engine-status">
+            <div class="engine-info">
+              <span class="engine-label" id="engine-label">SpoofDPI durumu kontrol ediliyor...</span>
+              <span class="engine-desc" id="engine-desc"></span>
+            </div>
+            <button class="btn-install" id="btn-install-engine" style="display:none;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Kur
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logs Tab -->
+      <div class="tab-pane" id="tab-logs">
+        <div class="logs-header">
+          <h3 class="settings-title">Bağlantı Logları</h3>
+          <button class="btn-clear-logs" id="btn-clear-logs">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            Temizle
+          </button>
+        </div>
+        <div class="logs-container" id="logs-container">
+          <div class="log-empty">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <p>Henüz log bulunmuyor</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

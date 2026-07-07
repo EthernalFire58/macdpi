@@ -1,0 +1,46 @@
+{
+  "name": "macdpi",
+  "version": "1.0.0",
+  "description": "macOS için DPI Bypass Uygulaması - Türkiye",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder --mac --arm64",
+    "build:universal": "electron-builder --mac --universal"
+  },
+  "author": "MacDPI",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "electron": "^35.0.0",
+    "electron-builder": "^26.0.0"
+  },
+  "build": {
+    "appId": "com.macdpi.app",
+    "productName": "MacDPI",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["arm64"]
+        }
+      ],
+      "icon": "src/assets/icon.png",
+      "darkModeSupport": true,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist"
+    },
+    "dmg": {
+      "title": "MacDPI",
+      "backgroundColor": "#0a0a0f"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*",
+      "engine/**/*",
+      "utils/**/*"
+    ]
+  }
+}
