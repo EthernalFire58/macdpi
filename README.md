@@ -26,6 +26,8 @@ Windows tarafındaki popüler **GoodbyeDPI-Turkey** projesinin işlevlerini teme
 
 ## 🛠️ macOS Kurulumu ve Kullanımı
 
+> 💡 **Detaylı Mac Adım-Adım Kurulum Kılavuzu:** Mac üzerinde sıfırdan kurulum, çalıştırma, `.dmg` paketleme ve macOS güvenlik izinleri hakkında görsel ve detaylı bilgi için **[macOS ARM Kurulum Kılavuzu'nu (MACOS_KURULUM.md)](MACOS_KURULUM.md)** inceleyebilirsiniz.
+
 Uygulamanın çalışabilmesi için macOS'ta **SpoofDPI** motorunun ve **Homebrew** paket yöneticisinin yüklü olması önerilir.
 
 ### 1. Ön Gereksinimler (Eğer Yüklü Değilse)
